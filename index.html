@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ежедневные поездки на море из Яблоновского — заказать микроавтобус</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563EB;
+            --primary-dark: #1D4ED8;
+            --primary-light: #DBEAFE;
+            --secondary: #0EA5E9;
+            --accent: #F59E0B;
+            --text: #1E293B;
+            --text-light: #64748B;
+            --bg: #FFFFFF;
+            --bg-light: #F8FAFC;
+            --bg-blue: #EFF6FF;
+            --border: #E2E8F0;
+            --shadow: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Button styles */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-light);
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+        }
+
+        .btn-telegram {
+            background: #0088cc;
+            color: white;
+        }
+
+        /* Section styles */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 16px;
+            color: var(--text);
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            text-align: center;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto 50px;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+            padding: 16px 0;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 20px;
+            color: var(--primary);
+        }
+
+        .nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+
+        .nav a:hover {
+            color: var(--primary);
+        }
+
+        .header-phone {
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 140px 0 100px;
+            background: linear-gradient(135deg, var(--bg-blue) 0%, #E0F2FE 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(37,99,235,0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-inner {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: var(--text-light);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .hero-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px 30px;
+            margin-bottom: 40px;
+        }
+
+        .hero-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 15px;
+        }
+
+        .hero-feature svg {
+            flex-shrink: 0;
+            color: var(--primary);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        /* Mobile Icon */
+        /* Table Styles */
+        .table-wrapper {
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+
+        .directions-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .directions-table th {
+            background: var(--primary);
+            color: white;
+            padding: 18px 20px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .directions-table td {
+            padding: 18px 20px;
+            border-bottom: 1px solid var(--border);
+            font-size: 15px;
+        }
+
+        .directions-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .directions-table tr:hover td {
+            background: var(--bg-light);
+        }
+
+        .direction-name {
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .price {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 18px;
+        }
+
+        .table-note {
+            background: var(--bg-light);
+            padding: 20px;
+            border-radius: 12px;
+            font-size: 15px;
+            color: var(--text-light);
+            border-left: 4px solid var(--primary);
+        }
+
+        .discount-text {
+            margin-top: 15px;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--primary-light);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* Steps Section */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            position: relative;
+        }
+
+        .step-card {
+            background: white;
+            padding: 32px 24px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-number {
+            width: 48px;
+            height: 48px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 20px;
+            margin: 0 auto 20px;
+        }
+
+        .step-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .step-card p {
+            color: var(--text-light);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .intro-text {
+            text-align: center;
+            font-size: 18px;
+            color: var(--text-light);
+            max-width: 800px;
+            margin: 0 auto 50px;
+            line-height: 1.7;
+        }
+
+        /* Schedule Styles */
+        .schedule-box {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: var(--shadow-lg);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .schedule-col h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .schedule-list {
+            list-style: none;
+        }
+
+        .schedule-item {
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 16px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .schedule-item:last-child {
+            border-bottom: none;
+        }
+
+        .schedule-label {
+            font-weight: 600;
+        }
+
+        .schedule-time {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .schedule-disclaimer {
+            grid-column: 1 / -1;
+            background: var(--bg-light);
+            padding: 20px;
+            border-radius: 12px;
+            font-size: 15px;
+            color: var(--text-light);
+            border-left: 4px solid var(--accent);
+            margin-top: 10px;
+        }
+
+        /* Transport Section */
+        .transport-card {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+        }
+
+        .transport-icon {
+            font-size: 80px;
+            margin-bottom: 24px;
+        }
+
+        .transport-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+            text-align: left;
+        }
+
+        .transport-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+
+        .transport-item-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-light);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 20px;
+        }
+
+        .transport-item h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .transport-item p {
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+
+        .transport-note {
+            margin-top: 30px;
+            padding: 20px;
+            background: var(--primary-light);
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        /* Reviews Section */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .review-card {
+            background: white;
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+
+        .review-card::before {
+            content: '"';
+            font-size: 60px;
+            color: var(--primary-light);
+            font-family: serif;
+            line-height: 1;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+        }
+
+        .review-text {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--text);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            padding-top: 20px;
+        }
+
+        .review-author {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .review-date {
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        /* Map Section */
+        .map-wrapper {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .map-iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+        }
+
+        .map-info {
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .map-info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .map-info-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .map-info-text h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .map-info-text p {
+            font-size: 15px;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+
+        /* FAQ Section */
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 20px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+
+        .faq-question:hover {
+            background: var(--bg-light);
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 24px;
+            color: var(--primary);
+            transition: transform 0.3s;
+            flex-shrink: 0;
+        }
+
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-answer-inner {
+            padding: 0 24px 20px;
+            color: var(--text-light);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+        }
+
+        /* Contact Section */
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .contact-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .contact-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-card p {
+            color: var(--text-light);
+            margin-bottom: 16px;
+        }
+
+        .contact-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .contact-phone {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .contact-phone-small {
+            font-size: 15px;
+            color: var(--text-light);
+        }
+
+        /* Form Styles */
+        .contact-form {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .contact-form h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: var(--text);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+            background: var(--bg-light);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-privacy {
+            font-size: 13px;
+            color: var(--text-light);
+            margin-top: 12px;
+            line-height: 1.5;
+        }
+
+        .form-privacy a {
+            color: var(--primary);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text);
+            color: white;
+            padding: 50px 0 30px;
+        }
+
+        .footer-inner {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-weight: 700;
+            font-size: 20px;
+            margin-bottom: 16px;
+        }
+
+        .footer-desc {
+            color: #94A3B8;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .footer-col h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #94A3B8;
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #334155;
+            padding-top: 20px;
+            text-align: center;
+            color: #64748B;
+            font-size: 14px;
+        }
+
+        .mobile-icon {
+            display: none;
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            .contact-wrapper { grid-template-columns: 1fr; }
+            .contact-form { padding: 24px; }
+            .footer-inner { grid-template-columns: 1fr; gap: 24px; }
+            .reviews-grid { grid-template-columns: 1fr; }
+            .map-info { grid-template-columns: 1fr; }
+            .schedule-box { grid-template-columns: 1fr; gap: 20px; padding: 24px; }
+            .schedule-disclaimer { grid-column: 1; margin-top: 0; }
+            .transport-card { padding: 30px 20px; }
+            .transport-features { grid-template-columns: 1fr; }
+            .features-grid { grid-template-columns: 1fr; }
+            .steps-grid { grid-template-columns: 1fr; }
+            .step-card { text-align: left; }
+            .step-number { margin-left: 0; }
+            .nav { display: none; }
+            .hero h1 { font-size: 32px; }
+            .hero-subtitle { font-size: 17px; }
+            .hero-features { grid-template-columns: 1fr; }
+            .section-title { font-size: 28px; }
+            .btn { padding: 12px 24px; font-size: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">🚌 Море из Яблоновского</div>
+                <nav class="nav">
+                    <a href="#directions">Направления</a>
+                    <a href="#steps">Как заказать</a>
+                    <a href="#schedule">Расписание</a>
+                    <a href="#faq">FAQ</a>
+                    <a href="#contact">Контакты</a>
+                </nav>
+                <a href="tel:+79990000000" class="header-phone">+7 (999) 000-00-00</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Block 1 -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-inner">
+                <div class="badge">Выезд только из посёлка Яблоновский</div>
+                <h1>Ежедневные поездки на море <span>из посёлка Яблоновский</span></h1>
+                <p class="hero-subtitle">
+                    Бухта Инал, Архипо-Осиповка, Бетта, Криница, Геленджик, Джанхот, Дивноморское — комфортные микроавтобусы, выезд утром, возвращение вечером.
+                </p>
+                <div class="hero-features">
+                    <div class="hero-feature">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill="currentColor"/></svg>
+                        Выезд из посёлка Яблоновский каждый день
+                    </div>
+                    <div class="hero-feature">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill="currentColor"/></svg>
+                        Комфортабельные микроавтобусы Mercedes
+                    </div>
+                    <div class="hero-feature">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill="currentColor"/></svg>
+                        Цены как у выезда из Краснодара
+                    </div>
+                    <div class="hero-feature">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill="currentColor"/></svg>
+                        Скидки детям до 7 лет
+                    </div>
+                </div>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">Забронировать место</a>
+                    <a href="#directions" class="btn btn-secondary">Посмотреть цены и направления</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Block 2 — Directions & Prices -->
+    <section id="directions" style="background: var(--bg-light);">
+        <div class="container">
+            <h2 class="section-title">Направления и цены</h2>
+            <p class="section-subtitle">Фиксированные цены на каждом направлении из посёлка Яблоновский. Стоимость указана за одну поездку в одну сторону.</p>
+            
+            <div class="table-wrapper">
+                <table class="directions-table">
+                    <thead>
+                        <tr>
+                            <th>Направление</th>
+                            <th>Цена (в одну сторону)</th>
+                            <th>Время в пути из Яблоновского</th>
+                            <th>Обратный выезд (ориентировочно)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="direction-name">Бухта Инал</td>
+                            <td class="price">1000 ₽</td>
+                            <td>1,5–2 часа</td>
+                            <td>16:30–17:30</td>
+                        </tr>
+                        <tr>
+                            <td class="direction-name">Архипо-Осиповка</td>
+                            <td class="price">1000 ₽</td>
+                            <td>1,5–2 часа</td>
+                            <td>16:00–17:00</td>
+                        </tr>
+                        <tr>
+                            <td class="direction-name">Бетта</td>
+                            <td class="price">1200 ₽</td>
+                            <td>2–2,5 часа</td>
+                            <td>16:00</td>
+                        </tr>
+                        <tr>
+                            <td class="direction-name">Криница</td>
+                            <td class="price">1200 ₽</td>
+                            <td>2–2,5 часа</td>
+                            <td>16:00</td>
+                        </tr>
+                        <tr>
+                            <td class="direction-name">Геленджик</td>
+                            <td class="price">1400 ₽</td>
+                            <td>2,5–3 часа</td>
+                            <td>15:30–16:30</td>
+                        </tr>
+                        <tr>
+                            <td class="direction-name">Дивноморское</td>
+                            <td class="price">1400 ₽</td>
+                            <td>2,5–3 часа</td>
+                            <td>15:00–16:00</td>
+                        </tr>
+                        <tr>
+                            <td class="direction-name">Джанхот</td>
+                            <td class="price">1500 ₽</td>
+                            <td>3–3,5 часа</td>
+                            <td>15:00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-note">
+                <strong>Важно:</strong> Точное время выезда и обратной поездки мы подтверждаем при бронировании. Время может немного меняться из‑за дорожной ситуации.
+                <div class="discount-text">🎉 Детям до 7 лет скидка 100 ₽ на любой рейс. Дети до 3 лет без отдельного места — бесплатно (по согласованию).</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Block 3 — Why from Yablonovsky -->
+    <section id="why">
+        <div class="container">
+            <h2 class="section-title">Преимущество для жителей Яблоновского</h2>
+            <p class="intro-text">Большинство поездок на море начинаются из Краснодара. Мы работаем для жителей посёлка Яблоновский: забираем вас на месте, без лишних пересадок и поездок в город.</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⏱️</div>
+                    <h3>Экономия времени</h3>
+                    <p>Не нужно тратить 1–2 часа, чтобы сначала добраться до Краснодара, а потом до точки сбора. Мы забираем вас прямо в посёлке.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📍</div>
+                    <h3>Удобные точки посадки</h3>
+                    <p>Забираем с нескольких остановок и удобных мест в Яблоновском. Точный список точек мы пришлём вам при бронировании.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Без доплаты за пригород</h3>
+                    <p>Стоимость поездки такая же, как у выезда из Краснодара. Вы платите только за саму поездку на море.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚌</div>
+                    <h3>Комфортная поездка</h3>
+                    <p>Микроавтобусы Mercedes, кондиционер, удобные кресла, аккуратные водители. Путь пролетит незаметно.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👨‍👩‍👧‍👦</div>
+                    <h3>Можно ехать всей семьёй</h3>
+                    <p>Берём взрослых и детей, помогаем с багажом, колясками и другими вещами. Путешествуйте вместе!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Block 4 — How it works (4 steps) -->
+    <section id="steps" style="background: var(--bg-light);">
+        <div class="container">
+            <h2 class="section-title">Четыре шага до моря</h2>
+            <p class="section-subtitle">Простая и понятная схема — от заявки до возвращения домой</p>
+            
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Заявка</h3>
+                    <p>Вы звоните нам или пишете в WhatsApp/Telegram. Сообщаете направление, дату, количество человек и район/остановку посадки в Яблоновском.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Подтверждение</h3>
+                    <p>Мы проверяем наличие мест, уточняем время отправления и точку встречи. Вы получаете подтверждение и геолокацию точки посадки.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Поездка к морю</h3>
+                    <p>В назначенное время приходите на точку посадки, садитесь в микроавтобус и спокойно едете к морю. В салоне работает кондиционер, есть багажное отделение.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3>Отдых и возвращение</h3>
+                    <p>Мы привозим вас на курорт, вы проводите день на море. Вечером встречаемся в оговорённом месте и возвращаемся обратно в Яблоновский по расписанию.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Block 5 — Schedule -->
+    <section id="schedule">
+        <div class="container">
+            <h2 class="section-title">Расписание выездов</h2>
+            <p class="section-subtitle">Точное время зависит от направления и сезона. При бронировании мы сообщим время выезда и обратной поездки.</p>
+            
+            <div class="schedule-box">
+                <div class="schedule-col">
+                    <h3>🌅 Утренний выезд</h3>
+                    <ul class="schedule-list">
+                        <li class="schedule-item">
+                            <span class="schedule-label">Бухта Инал, Архипо-Осиповка</span>
+                            <span class="schedule-time">4:30–5:30</span>
+                        </li>
+                        <li class="schedule-item">
+                            <span class="schedule-label">Бетта, Криница</span>
+                            <span class="schedule-time">5:00–6:00</span>
+                        </li>
+                        <li class="schedule-item">
+                            <span class="schedule-label">Геленджик, Дивноморское</span>
+                            <span class="schedule-time">5:30–6:30</span>
+                        </li>
+                        <li class="schedule-item">
+                            <span class="schedule-label">Джанхот</span>
+                            <span class="schedule-time">5:00–6:00</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="schedule-col">
+                    <h3>🌆 Обратный выезд с моря</h3>
+                    <ul class="schedule-list">
+                        <li class="schedule-item">
+                            <span class="schedule-label">Бухта Инал</span>
+                            <span class="schedule-time">16:30–17:30</span>
+                        </li>
+                        <li class="schedule-item">
+                            <span class="schedule-label">Архипо-Осиповка</span>
+                            <span class="schedule-time">16:00–17:00</span>
+                        </li>
+                        <li class="schedule-item">
+                            <span class="schedule-label">Бетта, Криница</span>
+                            <span class="schedule-time">16:00</span>
+                        </li>
+                        <li class="schedule-item">
+                            <span class="schedule-label">Геленджик, Дивноморское</span>
+                            <span class="schedule-time">15:30–16:30</span>
+                        </li>
+                        <li class="schedule-item">
+                            <span class="schedule-label">Джанхот</span>
+                            <span class="schedule-time">15:00</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="schedule-disclaimer">
+                    📍 <strong>Маршрут по Яблоновскому при возвращении мы согласуем с пассажирами</strong> и заранее обозначаем основные точки высадки. Точное время выезда подтверждаем при бронировании.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Block 6 — Our Transport -->
+    <section id="transport" style="background: var(--bg-light);">
+        <div class="container">
+            <h2 class="section-title">Комфортный и безопасный транспорт</h2>
+            <p class="section-subtitle">Мы возим пассажиров на комфортабельных микроавтобусах, рассчитанных на поездки на дальние расстояния</p>
+            
+            <div class="transport-card">
+                <div class="transport-icon">🚐</div>
+                <div class="transport-features">
+                    <div class="transport-item">
+                        <div class="transport-item-icon">🪑</div>
+                        <div>
+                            <h4>Mercedes-Benz Sprinter</h4>
+                            <p>Микроавтобусы на 18–20 мест с просторным салоном</p>
+                        </div>
+                    </div>
+                    <div class="transport-item">
+                        <div class="transport-item-icon">❄️</div>
+                        <div>
+                            <h4>Кондиционер по всему салону</h4>
+                            <p>Приятная температура даже в самые жаркие дни</p>
+                        </div>
+                    </div>
+                    <div class="transport-item">
+                        <div class="transport-item-icon">🧳</div>
+                        <div>
+                            <h4>Большое багажное отделение</h4>
+                            <p>Ваши вещи не мешают в проходе и не занимают место</p>
+                        </div>
+                    </div>
+                    <div class="transport-item">
+                        <div class="transport-item-icon">🔄</div>
+                        <div>
+                            <h4>Регулируемые кресла</h4>
+                            <p>Удобные сиденья с регулировкой спинки для комфорта</p>
+                        </div>
+                    </div>
+                    <div class="transport-item">
+                        <div class="transport-item-icon">🔧</div>
+                        <div>
+                            <h4>Техническое обслуживание</h4>
+                            <p>Регламентное ТО и чистый салон перед каждым рейсом</p>
+                        </div>
+                    </div>
+                    <div class="transport-item">
+                        <div class="transport-item-icon">👨‍✈️</div>
+                        <div>
+                            <h4>Опытные водители</h4>
+                            <p>Многолетний стаж межгородских поездок, аккуратное вождение</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="transport-note">
+                    ✅ Все перевозки осуществляются легально, с оформленной лицензией и страховкой пассажиров
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Block 7 — Reviews -->
+    <section id="reviews">
+        <div class="container">
+            <h2 class="section-title">Нас рекомендуют соседям</h2>
+            <p class="section-subtitle">Отзывы наших пассажиров, которые уже ездили на море с нами</p>
+            
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <p class="review-text">Очень удобно, что выезд прямо из Яблоновского. Не пришлось ехать в Краснодар. Микроавтобус чистый, кондиционер работал, водитель аккуратный.</p>
+                    <div class="review-author">Анна</div>
+                    <div class="review-date">Июнь 2026</div>
+                </div>
+                <div class="review-card">
+                    <p class="review-text">Ездили всей семьёй в Бухту Инал. Дети уснули по дороге, в салоне не жарко, приехали спокойно и без нервов. Будем ездить ещё.</p>
+                    <div class="review-author">Олег</div>
+                    <div class="review-date">Июль 2026</div>
+                </div>
+                <div class="review-card">
+                    <p class="review-text">Понравилось, что заранее прислали точку посадки на карте, всё по времени, без задержек. Обратно тоже забрали, как договорились.</p>
+                    <div class="review-author">Марина</div>
+                    <div class="review-date">Июль 2026</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Block 8 — Pickup Points & Map -->
+    <section id="pickup" style="background: var(--bg-light);">
+        <div class="container">
+            <h2 class="section-title">Точки посадки в Яблоновском</h2>
+            <p class="section-subtitle">Мы организуем посадку пассажиров в нескольких удобных точках посёлка</p>
+            
+            <div class="map-wrapper">
+                <iframe class="map-iframe" src="https://yandex.ru/map-widget/v1/?ll=38.4456%2C44.9884&z=14&pt=38.4456%2C44.9884%2Cpm2rdl" allowfullscreen></iframe>
+                <div class="map-info">
+                    <div class="map-info-item">
+                        <div class="map-info-icon">📍</div>
+                        <div class="map-info-text">
+                            <h3>Точка посадки</h3>
+                            <p>Остановка в центре посёлка — уточняем при бронировании</p>
+                        </div>
+                    </div>
+                    <div class="map-info-item">
+                        <div class="map-info-icon">📱</div>
+                        <div class="map-info-text">
+                            <h3>Геолокация</h3>
+                            <p>После бронирования присылаем точку на Яндекс или Google картах</p>
+                        </div>
+                    </div>
+                    <div class="map-info-item">
+                        <div class="map-info-icon">🕐</div>
+                        <div class="map-info-text">
+                            <h3>Время посадки</h3>
+                            <p>Утренний выезд с 4:30 до 6:00 в зависимости от направления</p>
+                        </div>
+                    </div>
+                    <div class="map-info-item">
+                        <div class="map-info-icon">🚐</div>
+                        <div class="map-info-text">
+                            <h3>Высадка при возвращении</h3>
+                            <p>Маршрут по Яблоновскому согласуем заранее с пассажирами</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Block 9 — FAQ -->
+    <section id="faq">
+        <div class="container">
+            <h2 class="section-title">Частые вопросы</h2>
+            <p class="section-subtitle">Что спрашивают чаще всего — отвечаем сразу</p>
+            
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">Во сколько точно выезд?</div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">Точное время зависит от направления и сезона. Обычно выезжаем утром с 4:30 до 6:00. При бронировании мы сообщаем вам время выезда и точку посадки.</div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Как забронировать место?</div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">Просто позвоните нам или напишите в WhatsApp/Telegram. Мы уточним дату, направление и количество мест, подтвердим бронь и отправим вам детали.</div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Как происходит оплата?</div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">Оплатить можно наличными водителю при посадке или переводом по реквизитам. При большом количестве мест мы можем попросить предоплату.</div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Можно ли поехать на несколько дней?</div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">Да, можно. Уточните дату выезда и дату возвращения — мы подберём для вас подходящие рейсы туда и обратно.</div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Есть ли скидки детям?</div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">Детям до 7 лет скидка 100 ₽ на билет. Дети до 3 лет без отдельного места могут ехать бесплатно, по предварительному согласованию.</div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Можно ли взять с собой животное?</div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">Возможно по договорённости и при наличии переноски. Уточните этот вопрос при бронировании.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Block 10 — Contacts & Form -->
+    <section id="contact" style="background: var(--bg-light);">
+        <div class="container">
+            <h2 class="section-title">Забронировать поездку</h2>
+            <p class="section-subtitle">Позвоните или напишите нам, чтобы забронировать место или задать вопрос. Ответим и всё подскажем.</p>
+            
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <h3>📞 Позвонить</h3>
+                        <p>Свяжитесь с нами напрямую по телефону</p>
+                        <a href="tel:+79990000000" class="contact-phone">+7 (999) 000-00-00</a>
+                        <p class="contact-phone-small">Ежедневно с 6:00 до 22:00</p>
+                    </div>
+                    <div class="contact-card">
+                        <h3>💬 Написать в мессенджер</h3>
+                        <p>Быстрый способ забронировать место</p>
+                        <div class="contact-buttons">
+                            <a href="https://wa.me/79990000000" class="btn btn-whatsapp" target="_blank">Написать в WhatsApp</a>
+                            <a href="https://t.me/+79990000000" class="btn btn-telegram" target="_blank">Написать в Telegram</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <form class="contact-form" action="#" method="POST">
+                    <h3>📝 Оставить заявку</h3>
+                    <div class="form-group">
+                        <label for="name">Ваше имя *</label>
+                        <input type="text" id="name" name="name" placeholder="Как к вам обращаться" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Телефон *</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+7 (999) 000-00-00" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="direction">Направление и дата</label>
+                        <input type="text" id="direction" name="direction" placeholder="Например: Бухта Инал, 25 июня">
+                    </div>
+                    <div class="form-group">
+                        <label for="people">Количество человек</label>
+                        <select id="people" name="people">
+                            <option value="">Выберите количество</option>
+                            <option value="1">1 человек</option>
+                            <option value="2">2 человека</option>
+                            <option value="3">3 человека</option>
+                            <option value="4">4 человека</option>
+                            <option value="5+">5 и более</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="comment">Комментарий</label>
+                        <textarea id="comment" name="comment" placeholder="Есть ли дети, особые пожелания и т.д."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Отправить заявку</button>
+                    <p class="form-privacy">Нажимая кнопку, вы соглашаетесь с <a href="#">политикой обработки персональных данных</a>.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <div>
+                    <div class="footer-logo">🚌 Море из Яблоновского</div>
+                    <p class="footer-desc">Ежедневные поездки на море из посёлка Яблоновский. Комфортабельные микроавтобусы, фиксированные цены, удобные точки посадки.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Навигация</h4>
+                    <ul class="footer-links">
+                        <li><a href="#directions">Направления</a></li>
+                        <li><a href="#schedule">Расписание</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#contact">Контакты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Направления</h4>
+                    <ul class="footer-links">
+                        <li><a href="#directions">Бухта Инал</a></li>
+                        <li><a href="#directions">Геленджик</a></li>
+                        <li><a href="#directions">Архипо-Осиповка</a></li>
+                        <li><a href="#directions">Все направления</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                © 2026 Море из Яблоновского. Ежедневные поездки на море из посёлка Яблоновский.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                const isActive = item.classList.contains('active');
+
+                // Close all
+                document.querySelectorAll('.faq-item').forEach(faq => {
+                    faq.classList.remove('active');
+                });
+
+                // Open clicked if it wasn't active
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header shadow on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 10) {
+                header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.08)';
+            } else {
+                header.style.boxShadow = 'none';
+            }
+        });
+    </script>
+
+</body>
+</html>
