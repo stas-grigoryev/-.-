@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Море из Яблоновского — ежедневные поездки на Чёрное море | Лето 2025</title>
+    <meta name="description" content="Прямые рейсы на море из Яблоновского. Бухта Инал, Геленджик, Архипо-Осиповка и другие направления. Комфортные микроавтобусы, цены от 1000₽.">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                fontFamily: { sans: ['Nunito', 'sans-serif'] },
+            }
+        }
+    }
+    </script>
+
+    <style>
+        /* === Анимация появления при скролле === */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.7s cubic-bezier(.22,1,.36,1), transform 0.7s cubic-bezier(.22,1,.36,1);
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-d1 { transition-delay: .1s }
+        .reveal-d2 { transition-delay: .2s }
+        .reveal-d3 { transition-delay: .3s }
+
+        /* === Плавающие пузырьки в Hero === */
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.18);
+            pointer-events: none;
+            animation: rise linear infinite;
+        }
+        @keyframes rise {
+            0%   { transform: translateY(0) scale(1);   opacity: 0 }
+            8%   { opacity: 1 }
+            85%  { opacity: .6 }
+            100% { transform: translateY(-110vh) scale(.4); opacity: 0 }
+        }
+
+        /* === Мобильное меню === */
+        .mob-menu { max-height: 0; overflow: hidden; transition: max-height .35s ease }
+        .mob-menu.open { max-height: 420px }
+
+        /* === FAQ аккордеон === */
+        .faq-body { max-height: 0; overflow: hidden; transition: max-height .4s ease }
+        .faq-body.open { max-height: 300px }
+
+        /* === Toast уведомление === */
+        .toast { transform: translateX(130%); transition: transform .45s cubic-bezier(.22,1,.36,1) }
+        .toast.show { transform: translateX(0) }
+
+        /* === Пульс для WhatsApp-кнопки === */
+        .wa-fab::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: #25D366;
+            animation: wa-pulse 2.2s ease-out infinite;
+            z-index: -1;
+        }
+        @keyframes wa-pulse {
+            0%   { transform: scale(1);   opacity: .45 }
+            100% { transform: scale(1.6); opacity: 0 }
+        }
+
+        /* === Кастомный скроллбар === */
+        ::-webkit-scrollbar { width: 7px }
+        ::-webkit-scrollbar-track { background: #f0f9ff }
+        ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 4px }
+        ::-webkit-scrollbar-thumb:hover { background: #64748b }
+
+        /* === Убираем подсветку при фокусе на мобильных === */
+        @media (hover: none) { .hover\:scale-105:hover { transform: none } }
+    </style>
+</head>
+
+<body class="font-sans text-slate-700 bg-white overflow-x-hidden">
+
+    <!-- ===================== HEADER ===================== -->
+    <header id="header" class="fixed top-0 inset-x-0 z-50 bg-white/90 backdrop-blur-lg border-b border-cyan-100/60 transition-shadow duration-300">
+        <div class="max-w-7xl mx-auto px-5 flex items-center justify-between h-16">
+            <!-- Логотип -->
+            <a href="#" class="flex items-center gap-2 text-cyan-700 font-extrabold text-lg select-none">
+                <i data-lucide="waves" class="w-6 h-6"></i>
+                <span>Море-Транс</span>
+            </a>
+
+            <!-- Десктоп-навигация -->
+            <nav class="hidden md:flex items-center gap-7 text-sm font-semibold text-slate-600">
+                <a href="#directions" class="nav-link hover:text-cyan-600 transition-colors">Направления</a>
+                <a href="#advantages" class="nav-link hover:text-cyan-600 transition-colors">Преимущества</a>
+                <a href="#schedule" class="nav-link hover:text-cyan-600 transition-colors">Расписание</a>
+                <a href="#faq" class="nav-link hover:text-cyan-600 transition-colors">Вопросы</a>
+                <a href="#contact" class="nav-link hover:text-cyan-600 transition-colors">Контакты</a>
+            </nav>
+
+            <!-- Телефон + бургер -->
+            <div class="flex items-center gap-4">
+                <a href="tel:+79990000000" class="hidden sm:inline-flex items-center gap-1.5 text-cyan-700 font-bold text-sm hover:text-cyan-800 transition-colors">
+                    <i data-lucide="phone" class="w-4 h-4"></i>
+                    +7 (999) 000-00-00
+                </a>
+                <button id="burger" class="md:hidden p-1.5 rounded-lg hover:bg-cyan-50 transition-colors" aria-label="Меню">
+                    <i data-lucide="menu" class="w-6 h-6 text-slate-700"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Мобильное меню -->
+        <div id="mobMenu" class="mob-menu md:hidden bg-white border-t border-cyan-100/60">
+            <nav class="flex flex-col px-5 py-4 gap-1">
+                <a href="#directions" class="mob-link py-2.5 px-3 rounded-lg text-slate-700 font-semibold hover:bg-cyan-50 transition-colors">Направления</a>
+                <a href="#advantages" class="mob-link py-2.5 px-3 rounded-lg text-slate-700 font-semibold hover:bg-cyan-50 transition-colors">Преимущества</a>
+                <a href="#schedule" class="mob-link py-2.5 px-3 rounded-lg text-slate-700 font-semibold hover:bg-cyan-50 transition-colors">Расписание</a>
+                <a href="#faq" class="mob-link py-2.5 px-3 rounded-lg text-slate-700 font-semibold hover:bg-cyan-50 transition-colors">Вопросы</a>
+                <a href="#contact" class="mob-link py-2.5 px-3 rounded-lg text-slate-700 font-semibold hover:bg-cyan-50 transition-colors">Контакты</a>
+                <a href="tel:+79990000000" class="mt-2 py-2.5 px-3 rounded-lg text-cyan-700 font-bold hover:bg-cyan-50 transition-colors text-center">
+                    <i data-lucide="phone" class="w-4 h-4 inline -mt-0.5"></i> +7 (999) 000-00-00
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===================== HERO ===================== -->
+    <section class="relative min-h-[92vh] flex items-center bg-gradient-to-br from-cyan-50 via-sky-100 to-cyan-200 pt-16 overflow-hidden">
+        <!-- Декоративные пузырьки -->
+        <div class="bubble w-4 h-4 left-[10%] bottom-0" style="animation-duration:14s;animation-delay:0s"></div>
+        <div class="bubble w-6 h-6 left-[30%] bottom-0" style="animation-duration:18s;animation-delay:3s"></div>
+        <div class="bubble w-3 h-3 left-[55%] bottom-0" style="animation-duration:12s;animation-delay:1s"></div>
+        <div class="bubble w-5 h-5 left-[75%] bottom-0" style="animation-duration:16s;animation-delay:5s"></div>
+        <div class="bubble w-3.5 h-3.5 left-[90%] bottom-0" style="animation-duration:20s;animation-delay:7s"></div>
+        <div class="bubble w-2.5 h-2.5 left-[45%] bottom-0" style="animation-duration:15s;animation-delay:9s"></div>
+
+        <!-- Декоративные пятна -->
+        <div class="absolute top-20 right-[-10%] w-[500px] h-[500px] rounded-full bg-cyan-300/20 blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-[-5%] left-[-8%] w-[400px] h-[400px] rounded-full bg-sky-300/20 blur-3xl pointer-events-none"></div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-5 py-20 w-full">
+            <div class="max-w-2xl">
+                <!-- Бейдж -->
+                <div class="inline-flex items-center gap-2 bg-amber-400 text-amber-900 text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full mb-6 shadow-sm">
+                    <i data-lucide="sun" class="w-3.5 h-3.5"></i>
+                    Лето 2025 — прямые рейсы из Яблоновского
+                </div>
+
+                <!-- Заголовок -->
+                <h1 class="text-4xl sm:text-5xl lg:text-[3.4rem] font-black leading-[1.12] text-slate-900 mb-5">
+                    Каждый день —<br>
+                    <span class="text-cyan-700">к морю без хлопот</span>
+                </h1>
+
+                <!-- Подзаголовок -->
+                <p class="text-lg sm:text-xl text-slate-600 leading-relaxed mb-8 max-w-xl">
+                    Бухта Инал, Геленджик, Архипо-Осиповка, Джанхот и другие курорты. Садитесь в посёлке — выходите на пляже.
+                </p>
+
+                <!-- Чекмарки -->
+                <ul class="grid sm:grid-cols-2 gap-x-6 gap-y-2.5 mb-10">
+                    <li class="flex items-center gap-2.5 text-sm font-semibold text-slate-700">
+                        <span class="flex-shrink-0 w-5 h-5 rounded-full bg-cyan-600 text-white flex items-center justify-center">
+                            <i data-lucide="check" class="w-3 h-3"></i>
+                        </span>
+                        Выезд прямо из Яблоновского
+                    </li>
+                    <li class="flex items-center gap-2.5 text-sm font-semibold text-slate-700">
+                        <span class="flex-shrink-0 w-5 h-5 rounded-full bg-cyan-600 text-white flex items-center justify-center">
+                            <i data-lucide="check" class="w-3 h-3"></i>
+                        </span>
+                        Микроавтобусы Mercedes Sprinter
+                    </li>
+                    <li class="flex items-center gap-2.5 text-sm font-semibold text-slate-700">
+                        <span class="flex-shrink-0 w-5 h-5 rounded-full bg-cyan-600 text-white flex items-center justify-center">
+                            <i data-lucide="check" class="w-3 h-3"></i>
+                        </span>
+                        Кондиционер в каждом салоне
+                    </li>
+                    <li class="flex items-center gap-2.5 text-sm font-semibold text-slate-700">
+                        <span class="flex-shrink-0 w-5 h-5 rounded-full bg-cyan-600 text-white flex items-center justify-center">
+                            <i data-lucide="check" class="w-3 h-3"></i>
+                        </span>
+                        Скидки детям до 7 лет
+                    </li>
+                </ul>
+
+                <!-- Кнопки -->
+                <div class="flex flex-wrap gap-3">
+                    <a href="#contact" class="inline-flex items-center gap-2 bg-cyan-600 hover:bg-cyan-700 text-white font-bold text-base px-7 py-3.5 rounded-xl shadow-lg shadow-cyan-600/25 hover:shadow-cyan-700/30 transition-all hover:-translate-y-0.5">
+                        <i data-lucide="calendar-check" class="w-5 h-5"></i>
+                        Забронировать место
+                    </a>
+                    <a href="#directions" class="inline-flex items-center gap-2 bg-white hover:bg-cyan-50 text-cyan-700 font-bold text-base px-7 py-3.5 rounded-xl border-2 border-cyan-200 hover:border-cyan-300 transition-all">
+                        <i data-lucide="map-pin" class="w-5 h-5"></i>
+                        Направления и цены
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Волна-разделитель -->
+        <div class="absolute bottom-0 inset-x-0 -mb-px">
+            <svg viewBox="0 0 1440 100" preserveAspectRatio="none" class="w-full h-16 sm:h-20">
+                <path d="M0,50 C240,90 480,10 720,50 C960,90 1200,10 1440,50 L1440,100 L0,100 Z" fill="white"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- ===================== МЕТРИКИ ===================== -->
+    <section class="py-10 bg-white">
+        <div class="max-w-5xl mx-auto px-5">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="reveal text-center p-5 rounded-2xl bg-cyan-50/70">
+                    <div class="text-3xl font-black text-cyan-700">7</div>
+                    <div class="text-sm font-semibold text-slate-500 mt-1">направлений</div>
+                </div>
+                <div class="reveal reveal-d1 text-center p-5 rounded-2xl bg-cyan-50/70">
+                    <div class="text-3xl font-black text-cyan-700">Ежедневно</div>
+                    <div class="text-sm font-semibold text-slate-500 mt-1">без выходных</div>
+                </div>
+                <div class="reveal reveal-d2 text-center p-5 rounded-2xl bg-cyan-50/70">
+                    <div class="text-3xl font-black text-cyan-700">1 000 ₽</div>
+                    <div class="text-sm font-semibold text-slate-500 mt-1">минимальная цена</div>
+                </div>
+                <div class="reveal reveal-d3 text-center p-5 rounded-2xl bg-amber-50">
+                    <div class="text-3xl font-black text-amber-600">−100 ₽</div>
+                    <div class="text-sm font-semibold text-slate-500 mt-1">скидка детям до 7 лет</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== НАПРАВЛЕНИЯ И ЦЕНЫ ===================== -->
+    <section id="directions" class="py-20 bg-cyan-50/50">
+        <div class="max-w-7xl mx-auto px-5">
+            <div class="text-center mb-12 reveal">
+                <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mb-3">Куда мы ездим</h2>
+                <p class="text-lg text-slate-500 max-w-2xl mx-auto">Стоимость указана за поездку в одну сторону из посёлка Яблоновский. Точное время возвращения подтверждаем при бронировании.</p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+                <!-- Бухта Инал (популярное) -->
+                <div class="reveal bg-white rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 border border-cyan-100 relative overflow-hidden group">
+                    <div class="absolute top-3 right-3 bg-amber-400 text-amber-900 text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">Популярное</div>
+                    <div class="p-6">
+                        <div class="w-11 h-11 rounded-xl bg-cyan-100 flex items-center justify-center mb-4 text-cyan-600">
+                            <i data-lucide="palmtree" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="text-xl font-extrabold text-slate-900 mb-1.5">Бухта Инал</h3>
+                        <p class="text-sm text-slate-500 mb-5 leading-relaxed">Песчаный пляж, чистая вода и дикие пейзажи. Одно из красивейших мест побережья.</p>
+                        <div class="flex items-end justify-between">
+                            <div>
+                                <div class="text-2xl font-black text-cyan-700">1 000 ₽</div>
+                                <div class="text-xs text-slate-400 mt-0.5">в одну сторону</div>
+                            </div>
+                            <div class="text-right text-sm text-slate-500">
+                                <div><i data-lucide="clock" class="w-3.5 h-3.5 inline -mt-0.5"></i> 1,5–2 ч</div>
+                                <div class="text-xs text-slate-400">обратно 16:30–17:30</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Архипо-Осиповка -->
+                <div class="reveal reveal-d1 bg-white rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 border border-cyan-100 overflow-hidden group">
+                    <div class="p-6">
+                        <div class="w-11 h-11 rounded-xl bg-cyan-100 flex items-center justify-center mb-4 text-cyan-600">
+                            <i data-lucide="umbrella" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="text-xl font-extrabold text-slate-900 mb-1.5">Архипо-Осиповка</h3>
+                        <p class="text-sm text-slate-500 mb-5 leading-relaxed">Широкие пляжи, развитая инфраструктура, кафе и рынки рядом с берегом.</p>
+                        <div class="flex items-end justify-between">
+                            <div>
+                                <div class="text-2xl font-black text-cyan-700">1 000 ₽</div>
+                                <div class="text-xs text-slate-400 mt-0.5">в одну сторону</div>
+                            </div>
+                            <div class="text-right text-sm text-slate-500">
+                                <div><i data-lucide="clock" class="w-3.5 h-3.5 inline -mt-0.5"></i> 1,5–2 ч</div>
+                                <div class="text-xs text-slate-400">обратно 16:00–17:00</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Бетта -->
+                <div class="reveal reveal-d2 bg-white rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 border border-cyan-100 overflow-hidden group">
+                    <div class="p-6">
+                        <div class="w-11 h-11 rounded-xl bg-cyan-100 flex items-center justify-center mb-4 text-cyan-600">
+                            <i data-lucide="mountain-snow" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="text-xl font-extrabold text-slate-900 mb-1.5">Бетта</h3>
+                        <p class="text-sm text-slate-500 mb-5 leading-relaxed">Уютная бухта в окружении гор, тёплое море и спокойная атмосфера.</p>
+                        <div class="flex items-end justify-between">
+                            <div>
+                                <div class="text-2xl font-black text-cyan-700">1 200 ₽</div>
+                                <div class="text-xs text-slate-400 mt-0.5">в одну сторону</div>
+                            </div>
+                            <div class="text-right text-sm text-slate-500">
+                                <div><i data-lucide="clock" class="w-3.5 h-3.5 inline -mt-0.5"></i> 2–2,5 ч</div>
+                                <div class="text-xs text-slate-400">обратно 16:00</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Криница -->
+                <div class="reveal bg-white rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 border border-cyan-100 overflow-hidden group">
+                    <div class="p-6">
+                        <div class="w-11 h-11 rounded-xl bg-cyan-100 flex items-center justify-center mb-4 text-cyan-600">
+                            <i data-lucide="trees" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="text-xl font-extrabold text-slate-900 mb-1.5">Криница</h3>
+                        <p class="text-sm text-slate-500 mb-5 leading-relaxed">Тихое место для семейного отдыха с чистым побережьем и мягким входом в море.</p>
+                        <div class="flex items-end justify-between">
+                            <div>
+                                <div class="text-2xl font-black text-cyan-700">1 200 ₽</div>
+                                <div class="text-xs text-slate-400 mt-0.5">в одну сторону</div>
+                            </div>
+                            <div class="text-right text-sm text-slate-500">
+                                <div><i data-lucide="clock" class="w-3.5 h-3.5 inline -mt-0.5"></i> 2–2,5 ч</div>
+                                <div class="text-xs text-slate-400">обратно 16:00</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Геленджик -->
+                <div class="reveal reveal-d1 bg-white rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 border border-cyan-100 overflow-hidden group">
+                    <div class="p-6">
+                        <div class="w-11 h-11 rounded-xl bg-cyan-100 flex items-center justify-center mb-4 text-cyan-600">
+                            <i data-lucide="landmark" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="text-xl font-extrabold text-slate-900 mb-1.5">Геленджик</h3>
+                        <p class="text-sm text-slate-500 mb-5 leading-relaxed">Крупный курорт с набережной, парками аттракционов, аквапарком и ресторанами.</p>
+                        <div class="flex items-end justify-between">
+                            <div>
+                                <div class="text-2xl font-black text-cyan-700">1 400 ₽</div>
+                                <div class="text-xs text-slate-400 mt-0.5">в одну сторону</div>
+                            </div>
+                            <div class="text-right text-sm text-slate-500">
+                                <div><i data-lucide="clock" class="w-3.5 h-3.5 inline -mt-0.5"></i> 2,5–3 ч</div>
+                                <div class="text-xs text-slate-400">обратно 15:30–16:30</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Дивноморское -->
+                <div class="reveal reveal-d2 bg-white rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 border border-cyan-100 overflow-hidden group">
+                    <div class="p-6">
+                        <div class="w-11 h-11 rounded-xl bg-cyan-100 flex items-center justify-center mb-4 text-cyan-600">
+                            <i data-lucide="binoculars" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="text-xl font-extrabold text-slate-900 mb-1.5">Дивноморское</h3>
+                        <p class="text-sm text-slate-500 mb-5 leading-relaxed">Живописные скалы, сосновый лес и уникальная природа у самого моря.</p>
+                        <div class="flex items-end justify-between">
+                            <div>
+                                <div class="text-2xl font-black text-cyan-700">1 400 ₽</div>
+                                <div class="text-xs text-slate-400 mt-0.5">в одну сторону</div>
+                            </div>
+                            <div class="text-right text-sm text-slate-500">
+                                <div><i data-lucide="clock" class="w-3.5 h-3.5 inline -mt-0.5"></i> 2,5–3 ч</div>
+                                <div class="text-xs text-slate-400">обратно 15:00–16:00</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Джанхот — отдельная широкая карточка -->
+            <div class="reveal mt-5 bg-white rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 border border-cyan-100 overflow-hidden">
+                <div class="p-6 sm:flex sm:items-center sm:justify-between gap-6">
+                    <div class="flex-1">
+                        <div class="flex items-center gap-3 mb-2">
+                            <div class="w-11 h-11 rounded-xl bg-cyan-100 flex items-center justify-center text-cyan-600">
+                                <i data-lucide="leaf" class="w-5 h-5"></i>
+                            </div>
+                            <h3 class="text-xl font-extrabold text-slate-900">Джанхот</h3>
+                        </div>
+                        <p class="text-sm text-slate-500 leading-relaxed max-w-md">Дикая природа, экзотические растения и самый экологичный пляж региона. Для тех, кто ищет уединение.</p>
+                    </div>
+                    <div class="flex items-end gap-8 mt-4 sm:mt-0">
+                        <div>
+                            <div class="text-2xl font-black text-cyan-700">1 500 ₽</div>
+                            <div class="text-xs text-slate-400 mt-0.5">в одну сторону</div>
+                        </div>
+                        <div class="text-right text-sm text-slate-500">
+                            <div><i data-lucide="clock" class="w-3.5 h-3.5 inline -mt-0.5"></i> 3–3,5 ч</div>
+                            <div class="text-xs text-slate-400">обратно 15:00</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Примечание -->
+            <div class="reveal mt-6 bg-amber-50 border-l-4 border-amber-400 rounded-r-xl p-5 text-sm text-slate-600 leading-relaxed">
+                <strong class="text-slate-800">Скидки для детей:</strong> детям до 7 лет — скидка 100 ₽ на любой рейс. Дети до 3 лет без отдельного места — бесплатно (по согласованию). Точное время выезда и возвращения подтверждаем при бронировании.
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== ПРЕИМУЩЕСТВА ===================== -->
+    <section id="advantages" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-5">
+            <div class="text-center mb-12 reveal">
+                <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mb-3">Почему жители Яблоновского едут с нами</h2>
+                <p class="text-lg text-slate-500 max-w-2xl mx-auto">Обычно поездки на море начинаются из Краснодара. Мы забираем вас прямо в посёлке — без пересадок и лишних часов в пути.</p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                <div class="reveal p-6 rounded-2xl bg-cyan-50/60 border border-cyan-100 hover:border-cyan-200 transition-colors">
+                    <div class="w-11 h-11 rounded-xl bg-cyan-600 text-white flex items-center justify-center mb-4">
+                        <i data-lucide="timer" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="text-lg font-extrabold text-slate-900 mb-2">Экономия 1–2 часа</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">Не нужно ехать в Краснодар к точке сбора. Садитесь в Яблоновском — и прямо на море.</p>
+                </div>
+                <div class="reveal reveal-d1 p-6 rounded-2xl bg-cyan-50/60 border border-cyan-100 hover:border-cyan-200 transition-colors">
+                    <div class="w-11 h-11 rounded-xl bg-cyan-600 text-white flex items-center justify-center mb-4">
+                        <i data-lucide="map-pin" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="text-lg font-extrabold text-slate-900 mb-2">Удобные точки посадки</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">Несколько остановок по посёлку. После бронирования пришлём точку на карте.</p>
+                </div>
+                <div class="reveal reveal-d2 p-6 rounded-2xl bg-cyan-50/60 border border-cyan-100 hover:border-cyan-200 transition-colors">
+                    <div class="w-11 h-11 rounded-xl bg-cyan-600 text-white flex items-center justify-center mb-4">
+                        <i data-lucide="badge-russian-ruble" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="text-lg font-extrabold text-slate-900 mb-2">Без доплат за пригород</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">Цена такая же, как при выезде из Краснодара. Платите только за поездку к морю.</p>
+                </div>
+                <div class="reveal p-6 rounded-2xl bg-cyan-50/60 border border-cyan-100 hover:border-cyan-200 transition-colors">
+                    <div class="w-11 h-11 rounded-xl bg-cyan-600 text-white flex items-center justify-center mb-4">
+                        <i data-lucide="snowflake" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="text-lg font-extrabold text-slate-900 mb-2">Кондиционер в салоне</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">Даже в июльскую жару в дороге комфортно. Mercedes Sprinter с климат-контролем.</p>
+                </div>
+                <div class="reveal reveal-d1 p-6 rounded-2xl bg-cyan-50/60 border border-cyan-100 hover:border-cyan-200 transition-colors">
+                    <div class="w-11 h-11 rounded-xl bg-cyan-600 text-white flex items-center justify-center mb-4">
+                        <i data-lucide="users" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="text-lg font-extrabold text-slate-900 mb-2">Вместе с семьёй</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">Берём детей, помогаем с багажом и колясками. Путешествуйте всей семьёй без стресса.</p>
+                </div>
+                <div class="reveal reveal-d2 p-6 rounded-2xl bg-cyan-50/60 border border-cyan-100 hover:border-cyan-200 transition-colors">
+                    <div class="w-11 h-11 rounded-xl bg-cyan-600 text-white flex items-center justify-center mb-4">
+                        <i data-lucide="shield-check" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="text-lg font-extrabold text-slate-900 mb-2">Легальные перевозки</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">Лицензия, страховка пассажиров, регулярное ТО. Ваша безопасность — наш приоритет.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== КАК ЗАКАЗАТЬ ===================== -->
+    <section id="steps" class="py-20 bg-cyan-50/50">
+        <div class="max-w-5xl mx-auto px-5">
+            <div class="text-center mb-14 reveal">
+                <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mb-3">Четыре шага до моря</h2>
+                <p class="text-lg text-slate-500">От заявки до возвращения домой — просто и понятно</p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+                <!-- Соединительная линия (десктоп) -->
+                <div class="hidden lg:block absolute top-10 left-[12.5%] right-[12.5%] h-0.5 bg-cyan-200 -z-0"></div>
+
+                <div class="reveal relative z-10 bg-white rounded-2xl p-6 shadow-sm border border-cyan-100 text-center">
+                    <div class="w-12 h-12 rounded-full bg-cyan-600 text-white text-xl font-black flex items-center justify-center mx-auto mb-4 ring-4 ring-cyan-100">1</div>
+                    <h3 class="text-base font-extrabold text-slate-900 mb-2">Заявка</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">Позвоните или напишите в мессенджер. Укажите направление, дату и количество человек.</p>
+                </div>
+                <div class="reveal reveal-d1 relative z-10 bg-white rounded-2xl p-6 shadow-sm border border-cyan-100 text-center">
+                    <div class="w-12 h-12 rounded-full bg-cyan-600 text-white text-xl font-black flex items-center justify-center mx-auto mb-4 ring-4 ring-cyan-100">2</div>
+                    <h3 class="text-base font-extrabold text-slate-900 mb-2">Подтверждение</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">Проверяем места, сообщаем точное время и присылаем геолокацию точки посадки.</p>
+                </div>
+                <div class="reveal reveal-d2 relative z-10 bg-white rounded-2xl p-6 shadow-sm border border-cyan-100 text-center">
+                    <div class="w-12 h-12 rounded-full bg-cyan-600 text-white text-xl font-black flex items-center justify-center mx-auto mb-4 ring-4 ring-cyan-100">3</div>
+                    <h3 class="text-base font-extrabold text-slate-900 mb-2">Поездка</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">Приходите на точку, садитесь в микроавтобус. Кондиционер, багажник — всё готово.</p>
+                </div>
+                <div class="reveal reveal-d3 relative z-10 bg-white rounded-2xl p-6 shadow-sm border border-cyan-100 text-center">
+                    <div class="w-12 h-12 rounded-full bg-cyan-600 text-white text-xl font-black flex items-center justify-center mx-auto mb-4 ring-4 ring-cyan-100">4</div>
+                    <h3 class="text-base font-extrabold text-slate-900 mb-2">Отдых и возврат</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">Проводите день на море, вечером встречаемся и возвращаемся в Яблоновский.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== РАСПИСАНИЕ ===================== -->
+    <section id="schedule" class="py-20 bg-white">
+        <div class="max-w-5xl mx-auto px-5">
+            <div class="text-center mb-12 reveal">
+                <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mb-3">Расписание выездов</h2>
+                <p class="text-lg text-slate-500 max-w-2xl mx-auto">Точное время зависит от направления и сезона. Уточняем при бронировании.</p>
+            </div>
+
+            <div class="reveal grid md:grid-cols-2 gap-6">
+                <!-- Утренний выезд -->
+                <div class="bg-cyan-50/60 border border-cyan-100 rounded-2xl p-6">
+                    <div class="flex items-center gap-2.5 mb-5">
+                        <div class="w-9 h-9 rounded-lg bg-amber-400 flex items-center justify-center text-amber-900">
+                            <i data-lucide="sunrise" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="text-lg font-extrabold text-slate-900">Утренний выезд</h3>
+                    </div>
+                    <ul class="space-y-0">
+                        <li class="flex justify-between py-3 border-b border-cyan-100 text-sm">
+                            <span class="font-semibold text-slate-700">Бухта Инал, Архипо-Осиповка</span>
+                            <span class="font-bold text-cyan-700">4:30–5:30</span>
+                        </li>
+                        <li class="flex justify-between py-3 border-b border-cyan-100 text-sm">
+                            <span class="font-semibold text-slate-700">Бетта, Криница</span>
+                            <span class="font-bold text-cyan-700">5:00–6:00</span>
+                        </li>
+                        <li class="flex justify-between py-3 border-b border-cyan-100 text-sm">
+                            <span class="font-semibold text-slate-700">Геленджик, Дивноморское</span>
+                            <span class="font-bold text-cyan-700">5:30–6:30</span>
+                        </li>
+                        <li class="flex justify-between py-3 text-sm">
+                            <span class="font-semibold text-slate-700">Джанхот</span>
+                            <span class="font-bold text-cyan-700">5:00–6:00</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Обратный выезд -->
+                <div class="bg-cyan-50/60 border border-cyan-100 rounded-2xl p-6">
+                    <div class="flex items-center gap-2.5 mb-5">
+                        <div class="w-9 h-9 rounded-lg bg-orange-400 flex items-center justify-center text-orange-900">
+                            <i data-lucide="sunset" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="text-lg font-extrabold text-slate-900">Обратный выезд</h3>
+                    </div>
+                    <ul class="space-y-0">
+                        <li class="flex justify-between py-3 border-b border-cyan-100 text-sm">
+                            <span class="font-semibold text-slate-700">Бухта Инал</span>
+                            <span class="font-bold text-cyan-700">16:30–17:30</span>
+                        </li>
+                        <li class="flex justify-between py-3 border-b border-cyan-100 text-sm">
+                            <span class="font-semibold text-slate-700">Архипо-Осиповка</span>
+                            <span class="font-bold text-cyan-700">16:00–17:00</span>
+                        </li>
+                        <li class="flex justify-between py-3 border-b border-cyan-100 text-sm">
+                            <span class="font-semibold text-slate-700">Бетта, Криница</span>
+                            <span class="font-bold text-cyan-700">16:00</span>
+                        </li>
+                        <li class="flex justify-between py-3 border-b border-cyan-100 text-sm">
+                            <span class="font-semibold text-slate-700">Геленджик, Дивноморское</span>
+                            <span class="font-bold text-cyan-700">15:30–16:30</span>
+                        </li>
+                        <li class="flex justify-between py-3 text-sm">
+                            <span class="font-semibold text-slate-700">Джанхот</span>
+                            <span class="font-bold text-cyan-700">15:00</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="reveal mt-6 bg-amber-50 border-l-4 border-amber-400 rounded-r-xl p-5 text-sm text-slate-600 leading-relaxed">
+                <i data-lucide="info" class="w-4 h-4 inline -mt-0.5 text-amber-500"></i>
+                <strong class="text-slate-800">Маршрут по Яблоновскому при возвращении</strong> согласовываем с пассажирами и заранее обозначаем точки высадки. Время может немного меняться из-за дорожной ситуации.
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== ТРАНСПОРТ ===================== -->
+    <section id="transport" class="py-20 bg-cyan-50/50">
+        <div class="max-w-5xl mx-auto px-5">
+            <div class="text-center mb-12 reveal">
+                <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mb-3">Ваш комфорт в пути</h2>
+                <p class="text-lg text-slate-500 max-w-2xl mx-auto">Микроавтобусы, подготовленные для дальних поездок на море</p>
+            </div>
+
+            <div class="reveal bg-white rounded-2xl shadow-sm border border-cyan-100 p-8 sm:p-10">
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="flex gap-4">
+                        <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-cyan-100 flex items-center justify-center text-cyan-600">
+                            <i data-lucide="car" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 mb-1">Mercedes-Benz Sprinter</h4>
+                            <p class="text-sm text-slate-500 leading-relaxed">18–20 мест, просторный салон</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-cyan-100 flex items-center justify-center text-cyan-600">
+                            <i data-lucide="wind" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 mb-1">Кондиционер</h4>
+                            <p class="text-sm text-slate-500 leading-relaxed">Приятная температура даже в жару</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-cyan-100 flex items-center justify-center text-cyan-600">
+                            <i data-lucide="luggage" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 mb-1">Багажное отделение</h4>
+                            <p class="text-sm text-slate-500 leading-relaxed">Вещи не занимают место в салоне</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-cyan-100 flex items-center justify-center text-cyan-600">
+                            <i data-lucide="armchair" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 mb-1">Регулируемые кресла</h4>
+                            <p class="text-sm text-slate-500 leading-relaxed">Удобная посадка на весь путь</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-cyan-100 flex items-center justify-center text-cyan-600">
+                            <i data-lucide="wrench" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 mb-1">Регулярное ТО</h4>
+                            <p class="text-sm text-slate-500 leading-relaxed">Чистый салон перед каждым рейсом</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-cyan-100 flex items-center justify-center text-cyan-600">
+                            <i data-lucide="id-card" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 mb-1">Опытные водители</h4>
+                            <p class="text-sm text-slate-500 leading-relaxed">Многолетний стаж межгородских поездок</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 bg-cyan-50 border border-cyan-100 rounded-xl p-4 flex items-center gap-3 text-sm font-semibold text-cyan-800">
+                    <i data-lucide="circle-check-big" class="w-5 h-5 flex-shrink-0 text-cyan-600"></i>
+                    Все перевозки осуществляются легально — лицензия и страховка пассажиров
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== ОТЗЫВЫ ===================== -->
+    <section id="reviews" class="py-20 bg-white">
+        <div class="max-w-5xl mx-auto px-5">
+            <div class="text-center mb-12 reveal">
+                <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mb-3">Отзывы пассажиров</h2>
+                <p class="text-lg text-slate-500">Реальные впечатления тех, кто уже ездил с нами</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-5">
+                <div class="reveal bg-cyan-50/50 border border-cyan-100 rounded-2xl p-6 relative">
+                    <div class="absolute top-5 right-5 text-cyan-200 text-5xl font-serif leading-none select-none">"</div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-cyan-600 text-white flex items-center justify-center font-bold text-sm">А</div>
+                        <div>
+                            <div class="font-bold text-slate-900 text-sm">Анна</div>
+                            <div class="text-xs text-slate-400">Июнь 2025</div>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-600 leading-relaxed relative z-10">Очень удобно, что выезд прямо из Яблоновского — не пришлось ехать в Краснодар. Микроавтобус чистый, кондиционер работал отлично, водитель аккуратный. Рекомендую!</p>
+                </div>
+                <div class="reveal reveal-d1 bg-cyan-50/50 border border-cyan-100 rounded-2xl p-6 relative">
+                    <div class="absolute top-5 right-5 text-cyan-200 text-5xl font-serif leading-none select-none">"</div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-amber-500 text-white flex items-center justify-center font-bold text-sm">О</div>
+                        <div>
+                            <div class="font-bold text-slate-900 text-sm">Олег</div>
+                            <div class="text-xs text-slate-400">Июль 2025</div>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-600 leading-relaxed relative z-10">Ездили всей семьёй в Бухту Инал. Дети уснули по дороге — в салоне не жарко, приехали спокойно. Будем ездить ещё, очень удобно для жителей посёлка.</p>
+                </div>
+                <div class="reveal reveal-d2 bg-cyan-50/50 border border-cyan-100 rounded-2xl p-6 relative">
+                    <div class="absolute top-5 right-5 text-cyan-200 text-5xl font-serif leading-none select-none">"</div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-teal-600 text-white flex items-center justify-center font-bold text-sm">М</div>
+                        <div>
+                            <div class="font-bold text-slate-900 text-sm">Марина</div>
+                            <div class="text-xs text-slate-400">Июль 2025</div>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-600 leading-relaxed relative z-10">Понравилось, что заранее прислали точку посадки на карте. Всё чётко по времени, без задержек. Обратно тоже забрали точно как договаривались. Спасибо!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== КАРТА ===================== -->
+    <section id="pickup" class="py-20 bg-cyan-50/50">
+        <div class="max-w-5xl mx-auto px-5">
+            <div class="text-center mb-12 reveal">
+                <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mb-3">Точки посадки</h2>
+                <p class="text-lg text-slate-500">Посадка в нескольких удобных местах посёлка Яблоновский</p>
+            </div>
+
+            <div class="reveal bg-white rounded-2xl shadow-sm border border-cyan-100 overflow-hidden">
+                <iframe class="w-full h-80 sm:h-96 border-0" src="https://yandex.ru/map-widget/v1/?ll=38.4456%2C44.9884&z=14&pt=38.4456%2C44.9884%2Cpm2rdl" allowfullscreen loading="lazy"></iframe>
+                <div class="grid sm:grid-cols-2 gap-4 p-6">
+                    <div class="flex gap-3">
+                        <i data-lucide="map-pin" class="w-5 h-5 text-cyan-600 flex-shrink-0 mt-0.5"></i>
+                        <div>
+                            <div class="font-bold text-slate-900 text-sm mb-0.5">Точка посадки</div>
+                            <div class="text-sm text-slate-500">Уточняется при бронировании — присылаем геолокацию</div>
+                        </div>
+                    </div>
+                    <div class="flex gap-3">
+                        <i data-lucide="clock" class="w-5 h-5 text-cyan-600 flex-shrink-0 mt-0.5"></i>
+                        <div>
+                            <div class="font-bold text-slate-900 text-sm mb-0.5">Время посадки</div>
+                            <div class="text-sm text-slate-500">Утренний выезд с 4:30 до 6:00 в зависимости от направления</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== FAQ ===================== -->
+    <section id="faq" class="py-20 bg-white">
+        <div class="max-w-3xl mx-auto px-5">
+            <div class="text-center mb-12 reveal">
+                <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mb-3">Частые вопросы</h2>
+                <p class="text-lg text-slate-500">Отвечаем на то, что спрашивают чаще всего</p>
+            </div>
+
+            <div class="reveal space-y-3" id="faqList">
+                <div class="faq-item bg-cyan-50/50 border border-cyan-100 rounded-xl overflow-hidden">
+                    <button class="faq-toggle w-full flex items-center justify-between gap-4 p-5 text-left font-bold text-slate-900 hover:bg-cyan-50 transition-colors">
+                        <span>Во сколько точно выезд?</span>
+                        <i data-lucide="plus" class="w-5 h-5 text-cyan-600 flex-shrink-0 faq-icon transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-body">
+                        <div class="px-5 pb-5 text-sm text-slate-600 leading-relaxed">Обычно выезжаем утром с 4:30 до 6:00 в зависимости от направления. Точное время и точку посадки мы сообщаем при бронировании — это занимает пару минут.</div>
+                    </div>
+                </div>
+                <div class="faq-item bg-cyan-50/50 border border-cyan-100 rounded-xl overflow-hidden">
+                    <button class="faq-toggle w-full flex items-center justify-between gap-4 p-5 text-left font-bold text-slate-900 hover:bg-cyan-50 transition-colors">
+                        <span>Как забронировать место?</span>
+                        <i data-lucide="plus" class="w-5 h-5 text-cyan-600 flex-shrink-0 faq-icon transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-body">
+                        <div class="px-5 pb-5 text-sm text-slate-600 leading-relaxed">Позвоните нам или напишите в WhatsApp / Telegram. Укажите дату, направление и количество человек — мы подтвердим бронь и пришлём все детали.</div>
+                    </div>
+                </div>
+                <div class="faq-item bg-cyan-50/50 border border-cyan-100 rounded-xl overflow-hidden">
+                    <button class="faq-toggle w-full flex items-center justify-between gap-4 p-5 text-left font-bold text-slate-900 hover:bg-cyan-50 transition-colors">
+                        <span>Как происходит оплата?</span>
+                        <i data-lucide="plus" class="w-5 h-5 text-cyan-600 flex-shrink-0 faq-icon transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-body">
+                        <div class="px-5 pb-5 text-sm text-slate-600 leading-relaxed">Наличными водителю при посадке или переводом по реквизитам. При большой группе возможна предоплата — обсудим индивидуально.</div>
+                    </div>
+                </div>
+                <div class="faq-item bg-cyan-50/50 border border-cyan-100 rounded-xl overflow-hidden">
+                    <button class="faq-toggle w-full flex items-center justify-between gap-4 p-5 text-left font-bold text-slate-900 hover:bg-cyan-50 transition-colors">
+                        <span>Можно ли поехать на несколько дней?</span>
+                        <i data-lucide="plus" class="w-5 h-5 text-cyan-600 flex-shrink-0 faq-icon transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-body">
+                        <div class="px-5 pb-5 text-sm text-slate-600 leading-relaxed">Да, конечно. Укажите дату выезда и дату возвращения — подберём подходящие рейсы туда и обратно.</div>
+                    </div>
+                </div>
+                <div class="faq-item bg-cyan-50/50 border border-cyan-100 rounded-xl overflow-hidden">
+                    <button class="faq-toggle w-full flex items-center justify-between gap-4 p-5 text-left font-bold text-slate-900 hover:bg-cyan-50 transition-colors">
+                        <span>Есть ли скидки детям?</span>
+                        <i data-lucide="plus" class="w-5 h-5 text-cyan-600 flex-shrink-0 faq-icon transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-body">
+                        <div class="px-5 pb-5 text-sm text-slate-600 leading-relaxed">Детям до 7 лет — скидка 100 ₽ на билет. Дети до 3 лет без отдельного места едут бесплатно по предварительному согласованию.</div>
+                    </div>
+                </div>
+                <div class="faq-item bg-cyan-50/50 border border-cyan-100 rounded-xl overflow-hidden">
+                    <button class="faq-toggle w-full flex items-center justify-between gap-4 p-5 text-left font-bold text-slate-900 hover:bg-cyan-50 transition-colors">
+                        <span>Можно ли взять с собой животное?</span>
+                        <i data-lucide="plus" class="w-5 h-5 text-cyan-600 flex-shrink-0 faq-icon transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-body">
+                        <div class="px-5 pb-5 text-sm text-slate-600 leading-relaxed">Возможно по договорённости при наличии переноски. Пожалуйста, уточните этот момент при бронировании.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== КОНТАКТЫ ===================== -->
+    <section id="contact" class="py-20 bg-cyan-50/50">
+        <div class="max-w-6xl mx-auto px-5">
+            <div class="text-center mb-12 reveal">
+                <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mb-3">Забронировать поездку</h2>
+                <p class="text-lg text-slate-500 max-w-2xl mx-auto">Позвоните, напишите или оставьте заявку — ответим за несколько минут</p>
+            </div>
+
+            <div class="grid lg:grid-cols-5 gap-6">
+                <!-- Контактная информация -->
+                <div class="lg:col-span-2 space-y-5 reveal">
+                    <div class="bg-white rounded-2xl border border-cyan-100 p-6">
+                        <div class="flex items-center gap-2.5 mb-3">
+                            <i data-lucide="phone" class="w-5 h-5 text-cyan-600"></i>
+                            <h3 class="font-bold text-slate-900">Позвонить</h3>
+                        </div>
+                        <a href="tel:+79990000000" class="text-2xl font-black text-cyan-700 hover:text-cyan-800 transition-colors block mb-1">+7 (999) 000-00-00</a>
+                        <p class="text-sm text-slate-400">Ежедневно с 6:00 до 22:00</p>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-cyan-100 p-6">
+                        <div class="flex items-center gap-2.5 mb-3">
+                            <i data-lucide="message-circle" class="w-5 h-5 text-cyan-600"></i>
+                            <h3 class="font-bold text-slate-900">Написать в мессенджер</h3>
+                        </div>
+                        <p class="text-sm text-slate-500 mb-4">Самый быстрый способ забронировать место</p>
+                        <div class="flex gap-3">
+                            <a href="https://wa.me/79990000000" target="_blank" class="flex-1 inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1da851] text-white font-bold text-sm px-4 py-3 rounded-xl transition-colors">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                                WhatsApp
+                            </a>
+                            <a href="https://t.me/+79990000000" target="_blank" class="flex-1 inline-flex items-center justify-center gap-2 bg-[#0088cc] hover:bg-[#006daa] text-white font-bold text-sm px-4 py-3 rounded-xl transition-colors">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                                Telegram
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Форма -->
+                <form id="bookingForm" class="lg:col-span-3 reveal reveal-d1 bg-white rounded-2xl border border-cyan-100 p-6 sm:p-8">
+                    <h3 class="text-xl font-extrabold text-slate-900 mb-6">Оставить заявку</h3>
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <div>
+                            <label for="name" class="block text-sm font-semibold text-slate-700 mb-1.5">Ваше имя <span class="text-red-400">*</span></label>
+                            <input type="text" id="name" name="name" required placeholder="Как к вам обращаться"
+                                class="w-full px-4 py-3 rounded-xl border-2 border-cyan-100 bg-cyan-50/30 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-cyan-400 focus:bg-white transition-colors">
+                        </div>
+                        <div>
+                            <label for="phone" class="block text-sm font-semibold text-slate-700 mb-1.5">Телефон <span class="text-red-400">*</span></label>
+                            <input type="tel" id="phone" name="phone" required placeholder="+7 (___) ___-__-__"
+                                class="w-full px-4 py-3 rounded-xl border-2 border-cyan-100 bg-cyan-50/30 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-cyan-400 focus:bg-white transition-colors">
+                        </div>
+                        <div>
+                            <label for="direction" class="block text-sm font-semibold text-slate-700 mb-1.5">Направление и дата</label>
+                            <input type="text" id="direction" name="direction" placeholder="Бухта Инал, 25 июня"
+                                class="w-full px-4 py-3 rounded-xl border-2 border-cyan-100 bg-cyan-50/30 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-cyan-400 focus:bg-white transition-colors">
+                        </div>
+                        <div>
+                            <label for="people" class="block text-sm font-semibold text-slate-700 mb-1.5">Количество человек</label>
+                            <select id="people" name="people"
+                                class="w-full px-4 py-3 rounded-xl border-2 border-cyan-100 bg-cyan-50/30 text-slate-900 text-sm focus:outline-none focus:border-cyan-400 focus:bg-white transition-colors">
+                                <option value="">Выберите</option>
+                                <option value="1">1 человек</option>
+                                <option value="2">2 человека</option>
+                                <option value="3">3 человека</option>
+                                <option value="4">4 человека</option>
+                                <option value="5+">5 и более</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <label for="comment" class="block text-sm font-semibold text-slate-700 mb-1.5">Комментарий</label>
+                        <textarea id="comment" name="comment" rows="3" placeholder="Есть ли дети, особые пожелания..."
+                            class="w-full px-4 py-3 rounded-xl border-2 border-cyan-100 bg-cyan-50/30 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-cyan-400 focus:bg-white transition-colors resize-y"></textarea>
+                    </div>
+                    <button type="submit" class="mt-6 w-full inline-flex items-center justify-center gap-2 bg-cyan-600 hover:bg-cyan-700 text-white font-bold text-base px-7 py-3.5 rounded-xl shadow-lg shadow-cyan-600/25 hover:shadow-cyan-700/30 transition-all hover:-translate-y-0.5 active:translate-y-0">
+                        <i data-lucide="send" class="w-5 h-5"></i>
+                        Отправить заявку
+                    </button>
+                    <p class="mt-3 text-xs text-slate-400 leading-relaxed">Нажимая кнопку, вы соглашаетесь с <a href="#" class="text-cyan-600 hover:underline">политикой обработки персональных данных</a>.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="bg-slate-900 text-white pt-14 pb-8">
+        <div class="max-w-7xl mx-auto px-5">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-10 mb-12">
+                <div>
+                    <div class="flex items-center gap-2 font-extrabold text-lg mb-3">
+                        <i data-lucide="waves" class="w-5 h-5 text-cyan-400"></i>
+                        Море-Транс
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed max-w-xs">Ежедневные поездки на Чёрное море из посёлка Яблоновский. Комфортабельные микроавтобусы, фиксированные цены, удобные точки посадки.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-sm uppercase tracking-wider text-slate-300 mb-4">Навигация</h4>
+                    <ul class="space-y-2.5">
+                        <li><a href="#directions" class="text-slate-400 hover:text-white text-sm transition-colors">Направления и цены</a></li>
+                        <li><a href="#advantages" class="text-slate-400 hover:text-white text-sm transition-colors">Преимущества</a></li>
+                        <li><a href="#schedule" class="text-slate-400 hover:text-white text-sm transition-colors">Расписание</a></li>
+                        <li><a href="#faq" class="text-slate-400 hover:text-white text-sm transition-colors">Частые вопросы</a></li>
+                        <li><a href="#contact" class="text-slate-400 hover:text-white text-sm transition-colors">Контакты</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-sm uppercase tracking-wider text-slate-300 mb-4">Направления</h4>
+                    <ul class="space-y-2.5">
+                        <li><a href="#directions" class="text-slate-400 hover:text-white text-sm transition-colors">Бухта Инал</a></li>
+                        <li><a href="#directions" class="text-slate-400 hover:text-white text-sm transition-colors">Архипо-Осиповка</a></li>
+                        <li><a href="#directions" class="text-slate-400 hover:text-white text-sm transition-colors">Геленджик</a></li>
+                        <li><a href="#directions" class="text-slate-400 hover:text-white text-sm transition-colors">Джанхот</a></li>
+                        <li><a href="#directions" class="text-slate-400 hover:text-white text-sm transition-colors">Все направления</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-slate-800 pt-6 text-center text-slate-500 text-sm">
+                &copy; 2025 Море-Транс. Ежедневные поездки на море из посёлка Яблоновский.
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===================== ПЛАВАЮЩАЯ КНОПКА WHATSAPP ===================== -->
+    <a href="https://wa.me/79990000000" target="_blank"
+       class="wa-fab fixed bottom-6 right-6 z-50 w-14 h-14 bg-[#25D366] hover:bg-[#1da851] rounded-full flex items-center justify-center text-white shadow-xl transition-transform hover:scale-110"
+       aria-label="Написать в WhatsApp">
+        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+
+    <!-- ===================== КНОПКА «НАВЕРХ» ===================== -->
+    <button id="scrollTop" aria-label="Наверх"
+        class="fixed bottom-6 left-6 z-50 w-11 h-11 bg-white border border-cyan-200 rounded-full flex items-center justify-center text-cyan-700 shadow-lg opacity-0 pointer-events-none transition-all duration-300 hover:bg-cyan-50 hover:border-cyan-300">
+        <i data-lucide="arrow-up" class="w-5 h-5"></i>
+    </button>
+
+    <!-- ===================== TOAST УВЕДОМЛЕНИЕ ===================== -->
+    <div id="toast" class="toast fixed top-20 right-5 z-[60] bg-white border border-green-200 shadow-xl rounded-xl p-4 flex items-center gap-3 max-w-sm">
+        <div class="w-9 h-9 rounded-full bg-green-100 text-green-600 flex items-center justify-center flex-shrink-0">
+            <i data-lucide="check" class="w-5 h-5"></i>
+        </div>
+        <div>
+            <div class="font-bold text-slate-900 text-sm">Заявка отправлена!</div>
+            <div class="text-xs text-slate-500">Мы свяжемся с вами в ближайшее время</div>
+        </div>
+    </div>
+
+    <!-- ===================== МОБИЛЬНЫЙ STICKY CTA ===================== -->
+    <div id="stickyCta" class="fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur-lg border-t border-cyan-100 p-3 sm:hidden opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="flex gap-2">
+            <a href="tel:+79990000000" class="flex-1 inline-flex items-center justify-center gap-2 bg-cyan-600 text-white font-bold text-sm py-3 rounded-xl">
+                <i data-lucide="phone" class="w-4 h-4"></i> Позвонить
+            </a>
+            <a href="https://wa.me/79990000000" target="_blank" class="flex-1 inline-flex items-center justify-center gap-2 bg-[#25D366] text-white font-bold text-sm py-3 rounded-xl">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                WhatsApp
+            </a>
+        </div>
+    </div>
+
+    <!-- ===================== JAVASCRIPT ===================== -->
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        /* Инициализация Lucide-иконок */
+        lucide.createIcons();
+
+        /* --- Мобильное меню --- */
+        const burger = document.getElementById('burger');
+        const mobMenu = document.getElementById('mobMenu');
+        burger.addEventListener('click', () => {
+            mobMenu.classList.toggle('open');
+        });
+        /* Закрытие при клике по ссылке */
+        document.querySelectorAll('.mob-link').forEach(link => {
+            link.addEventListener('click', () => mobMenu.classList.remove('open'));
+        });
+
+        /* --- Тень хедера при скролле --- */
+        const header = document.getElementById('header');
+        const stickyCta = document.getElementById('stickyCta');
+        const scrollTopBtn = document.getElementById('scrollTop');
+
+        function onScroll() {
+            const y = window.scrollY;
+            /* Тень хедера */
+            header.style.boxShadow = y > 10 ? '0 1px 20px rgba(0,0,0,0.06)' : 'none';
+            /* Кнопка «наверх» */
+            if (y > 600) {
+                scrollTopBtn.classList.remove('opacity-0', 'pointer-events-none');
+                scrollTopBtn.classList.add('opacity-100');
+            } else {
+                scrollTopBtn.classList.add('opacity-0', 'pointer-events-none');
+                scrollTopBtn.classList.remove('opacity-100');
+            }
+            /* Мобильный sticky CTA — показываем после hero */
+            if (y > window.innerHeight * 0.8) {
+                stickyCta.classList.remove('opacity-0', 'pointer-events-none');
+                stickyCta.classList.add('opacity-100');
+            } else {
+                stickyCta.classList.add('opacity-0', 'pointer-events-none');
+                stickyCta.classList.remove('opacity-100');
+            }
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+
+        /* Кнопка «наверх» */
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        /* --- Плавный скролл по якорям --- */
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', (e) => {
+                const target = document.querySelector(anchor.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    const offset = header.offsetHeight + 8;
+                    const top = target.getBoundingClientRect().top + window.scrollY - offset;
+                    window.scrollTo({ top, behavior: 'smooth' });
+                }
+            });
+        });
+
+        /* --- Активный пункт навигации при скролле --- */
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const observerNav = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    navLinks.forEach(link => {
+                        link.classList.toggle('text-cyan-600',
+                            link.getAttribute('href') === `#${id}`);
+                    });
+                }
+            });
+        }, { rootMargin: '-30% 0px -70% 0px' });
+        sections.forEach(s => observerNav.observe(s));
+
+        /* --- FAQ-аккордеон --- */
+        document.querySelectorAll('.faq-toggle').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.parentElement;
+                const body = item.querySelector('.faq-body');
+                const icon = btn.querySelector('.faq-icon');
+                const isOpen = body.classList.contains('open');
+
+                /* Закрываем все */
+                document.querySelectorAll('.faq-body').forEach(b => b.classList.remove('open'));
+                document.querySelectorAll('.faq-icon').forEach(i => i.style.transform = 'rotate(0deg)');
+
+                /* Открываем текущий, если был закрыт */
+                if (!isOpen) {
+                    body.classList.add('open');
+                    icon.style.transform = 'rotate(45deg)';
+                }
+            });
+        });
+
+        /* --- Маска телефона --- */
+        const phoneInput = document.getElementById('phone');
+        phoneInput.addEventListener('input', (e) => {
+            let val = e.target.value.replace(/\D/g, '');
+            if (val.length === 0) { e.target.value = ''; return; }
+            if (val[0] === '8') val = '7' + val.slice(1);
+            if (val[0] !== '7') val = '7' + val;
+            let formatted = '+7';
+            if (val.length > 1) formatted += ' (' + val.slice(1, 4);
+            if (val.length > 4) formatted += ') ' + val.slice(4, 7);
+            if (val.length > 7) formatted += '-' + val.slice(7, 9);
+            if (val.length > 9) formatted += '-' + val.slice(9, 11);
+            e.target.value = formatted;
+        });
+
+        /* --- Отправка формы --- */
+        const form = document.getElementById('bookingForm');
+        const toast = document.getElementById('toast');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            /* Простейшая валидация */
+            const name = form.name.value.trim();
+            const phone = form.phone.value.trim();
+            if (!name || phone.replace(/\D/g, '').length < 11) return;
+
+            /* Показываем toast */
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 4000);
+
+            /* Сбрасываем форму */
+            form.reset();
+        });
+
+        /* --- Reveal-анимации при скролле --- */
+        const reveals = document.querySelectorAll('.reveal');
+        const observerReveal = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observerReveal.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+        reveals.forEach(el => observerReveal.observe(el));
+
+    });
+    </script>
+
+</body>
+</html>
